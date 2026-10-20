@@ -1,21 +1,17 @@
 [gd_scene format=3 uid="uid://vjrwb5qw6cab"]
 
 [ext_resource type="Script" uid="uid://bwgdqc1u3xdv0" path="res://Scenes/player_movement.gd" id="1_cvnsp"]
-[ext_resource type="Texture2D" uid="uid://ba01ymaa3iu23" path="res://placeholders/Player_Place_Holder.png" id="1_v0iea"]
+[ext_resource type="Texture2D" uid="uid://cqrgij8pbnk14" path="res://Assets/Player charcter/Placeholder_player.png" id="2_cvnsp"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_npmfu"]
-radius = 2.0
-height = 8.0
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_cvnsp"]
-atlas = ExtResource("1_v0iea")
-region = Rect2(0, 0, 16, 16)
+[sub_resource type="AtlasTexture" id="AtlasTexture_6t5aa"]
+atlas = ExtResource("2_cvnsp")
+region = Rect2(0, 0, 10, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_f60y1"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_cvnsp")
+"texture": SubResource("AtlasTexture_6t5aa")
 }],
 "loop": 1,
 "name": &"Placeholder",
@@ -27,13 +23,18 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_npmfu"]
+radius = 4.0
+height = 8.0
+
 [node name="Player" type="CharacterBody2D" unique_id=1086875462]
 script = ExtResource("1_cvnsp")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=198709354]
+position = Vector2(0, -5)
+sprite_frames = SubResource("SpriteFrames_f60y1")
+animation = &"Placeholder"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1260683920]
 position = Vector2(0, -1)
 shape = SubResource("CapsuleShape2D_npmfu")
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=198709354]
-sprite_frames = SubResource("SpriteFrames_f60y1")
-animation = &"Placeholder"
