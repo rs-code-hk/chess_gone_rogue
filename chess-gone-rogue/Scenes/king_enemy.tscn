@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://b33s1ahnhk8h5"]
+
+[ext_resource type="Texture2D" uid="uid://du2yi88aap1gj" path="res://Assets/Pieces/King.png" id="1_fev6l"]
+
+[node name="king enemy" type="Node2D" unique_id=305075638]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=626388323]
+texture = ExtResource("1_fev6l")
