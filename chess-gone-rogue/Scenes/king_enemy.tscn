@@ -2,7 +2,18 @@
 
 [ext_resource type="Texture2D" uid="uid://du2yi88aap1gj" path="res://Assets/Pieces/King.png" id="1_fev6l"]
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xqf3p"]
+radius = 3.0
+height = 14.0
+
 [node name="king enemy" type="Node2D" unique_id=305075638]
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=626388323]
 texture = ExtResource("1_fev6l")
+
+[node name="hit box" type="Area2D" parent="." unique_id=1178897004]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hit box" unique_id=1771881686]
+position = Vector2(0, 1)
+shape = SubResource("CapsuleShape2D_xqf3p")
