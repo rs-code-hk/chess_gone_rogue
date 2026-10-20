@@ -24,7 +24,7 @@ shape = SubResource("WorldBoundaryShape2D_f7vo3")
 position = Vector2(20, 47)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="left boundary" unique_id=119797154]
-position = Vector2(-72, -47)
+position = Vector2(-73, -47)
 rotation = 1.5707964
 shape = SubResource("WorldBoundaryShape2D_f7vo3")
 
@@ -33,11 +33,12 @@ position = Vector2(65, 0)
 rotation = -1.5707964
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="right boundary" unique_id=632781726]
+position = Vector2(-4.371139e-08, 1)
 shape = SubResource("WorldBoundaryShape2D_xqf3p")
 
 [node name="top boundary" type="StaticBody2D" parent="." unique_id=2112973897]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="top boundary" unique_id=1188565945]
-position = Vector2(0, -65)
+position = Vector2(0, -66)
 rotation = 3.1415927
 shape = SubResource("WorldBoundaryShape2D_k5p3t")
