@@ -2,7 +2,42 @@
 
 [ext_resource type="Texture2D" uid="uid://ddb43jiewp3fh" path="res://Assets/Environment/Board.png" id="1_tumq0"]
 
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_f7vo3"]
+distance = -13.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_xqf3p"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_k5p3t"]
+
 [node name="Level" type="Node2D" unique_id=977631278]
 
 [node name="Board Display" type="Sprite2D" parent="." unique_id=1091293121]
 texture = ExtResource("1_tumq0")
+
+[node name="bottom boundary" type="StaticBody2D" parent="." unique_id=1990378592]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="bottom boundary" unique_id=1745524463]
+position = Vector2(0, 53)
+shape = SubResource("WorldBoundaryShape2D_f7vo3")
+
+[node name="left boundary" type="StaticBody2D" parent="." unique_id=1342719637]
+position = Vector2(20, 47)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="left boundary" unique_id=119797154]
+position = Vector2(-72, -47)
+rotation = 1.5707964
+shape = SubResource("WorldBoundaryShape2D_f7vo3")
+
+[node name="right boundary" type="StaticBody2D" parent="." unique_id=557044390]
+position = Vector2(65, 0)
+rotation = -1.5707964
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="right boundary" unique_id=632781726]
+shape = SubResource("WorldBoundaryShape2D_xqf3p")
+
+[node name="top boundary" type="StaticBody2D" parent="." unique_id=2112973897]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="top boundary" unique_id=1188565945]
+position = Vector2(0, -65)
+rotation = 3.1415927
+shape = SubResource("WorldBoundaryShape2D_k5p3t")
