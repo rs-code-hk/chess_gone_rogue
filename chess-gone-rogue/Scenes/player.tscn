@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://vjrwb5qw6cab"]
 
+[ext_resource type="Script" uid="uid://bwgdqc1u3xdv0" path="res://Scenes/player_movement.gd" id="1_cvnsp"]
 [ext_resource type="Texture2D" uid="uid://ba01ymaa3iu23" path="res://placeholders/Player_Place_Holder.png" id="1_v0iea"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_npmfu"]
@@ -27,6 +28,7 @@ animations = [{
 }]
 
 [node name="Player" type="CharacterBody2D" unique_id=1086875462]
+script = ExtResource("1_cvnsp")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1260683920]
 position = Vector2(0, -1)

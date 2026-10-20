@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cd4mc4bh7q8yg"]
 
 [ext_resource type="Texture2D" uid="uid://ddb43jiewp3fh" path="res://Assets/Environment/Board.png" id="1_tumq0"]
+[ext_resource type="PackedScene" uid="uid://vjrwb5qw6cab" path="res://Scenes/player.tscn" id="2_k5f4k"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_f7vo3"]
 distance = -13.0
@@ -42,3 +43,7 @@ shape = SubResource("WorldBoundaryShape2D_xqf3p")
 position = Vector2(0, -66)
 rotation = 3.1415927
 shape = SubResource("WorldBoundaryShape2D_k5p3t")
+
+[node name="Player" parent="." unique_id=1086875462 instance=ExtResource("2_k5f4k")]
+position = Vector2(-19, 56)
+scale = Vector2(2.48, 2.48)

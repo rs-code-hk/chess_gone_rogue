@@ -1,3 +1,12 @@
 [gd_scene format=3 uid="uid://snueulsaorte"]
 
+[ext_resource type="PackedScene" uid="uid://cd4mc4bh7q8yg" path="res://Scenes/level.tscn" id="1_ebmjs"]
+
 [node name="Game" type="Node2D" unique_id=2137133758]
+
+[node name="Level" parent="." unique_id=977631278 instance=ExtResource("1_ebmjs")]
+position = Vector2(0, -1)
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=686752142]
+scale = Vector2(1.9863821, 1.0689039)
+zoom = Vector2(4, 4)
