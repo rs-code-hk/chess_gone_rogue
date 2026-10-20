@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://cd4mc4bh7q8yg"]
+
+[ext_resource type="Texture2D" uid="uid://ddb43jiewp3fh" path="res://Assets/Environment/Board.png" id="1_tumq0"]
+
+[node name="Level" type="Node2D" unique_id=977631278]
+
+[node name="Board Display" type="Sprite2D" parent="." unique_id=1091293121]
+texture = ExtResource("1_tumq0")
