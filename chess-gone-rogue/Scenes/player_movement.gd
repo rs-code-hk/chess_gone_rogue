@@ -21,7 +21,7 @@ var canDash = true
 var dashDelay = 0
 
 func getInputs() -> Vector2:
-	return Vector2(Input.get_axis("ui_left", "ui_right"), Input.get_axis("ui_up", "ui_down"))
+	return Vector2(Input.get_axis("a", "d"), Input.get_axis("w", "s"))
 
 func _physics_process(delta: float) -> void:
 	# Get movement
