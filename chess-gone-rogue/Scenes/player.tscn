@@ -29,6 +29,7 @@ animations = [{
 
 [node name="Player" type="CharacterBody2D" unique_id=1086875462]
 script = ExtResource("1_cvnsp")
+metadata/temp = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1260683920]
 position = Vector2(0, -1)
