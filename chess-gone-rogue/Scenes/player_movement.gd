@@ -10,6 +10,7 @@ const WALLJUMP_DELAY = 10
 const DASH_DURATION = 15
 const DASH_VELOCITY = 175
 const TOTAL_DASH_DELAY = 20
+const MAX_I_FRAMES = 50
 
 var jumps = 2
 var walljumping = 0
@@ -19,11 +20,22 @@ var dashingDirection = Vector2(0, 0)
 var lastHorizontalDirection = 1
 var canDash = true
 var dashDelay = 0
+var iFrames = 0
+var health = 3
 
 func getInputs() -> Vector2:
 	return Vector2(Input.get_axis("a", "d"), Input.get_axis("w", "s"))
 
 func _physics_process(delta: float) -> void:
+	# Check getting hit
+	if ray_cast_left.get_collider() == get_node("../../king enemy/hit box") or ray_cast_right.get_collider() == get_node("../../king enemy/hit box"):
+		if iFrames <= 0:
+			print("Hit!")
+			iFrames = MAX_I_FRAMES
+			health -= 1
+			if health == 0:
+				get_tree().reload_current_scene()
+	
 	# Get movement
 	var direction = getInputs()
 	if direction.x != 0:
@@ -46,6 +58,7 @@ func _physics_process(delta: float) -> void:
 	walljumping -= 1
 	dashFrames -= 1
 	dashDelay -= 1
+	iFrames -= 1
 	
 	# Get Jump Count
 	if is_on_wall():

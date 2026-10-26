@@ -41,6 +41,8 @@ animation = &"Placeholder"
 
 [node name="RayCastLeft" type="RayCast2D" parent="." unique_id=1197997488]
 target_position = Vector2(-8, 0)
+collide_with_areas = true
 
 [node name="RayCastRight" type="RayCast2D" parent="." unique_id=18192860]
 target_position = Vector2(8, 0)
+collide_with_areas = true
