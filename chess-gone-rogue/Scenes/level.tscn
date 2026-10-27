@@ -45,5 +45,5 @@ rotation = 3.1415927
 shape = SubResource("WorldBoundaryShape2D_k5p3t")
 
 [node name="Player" parent="." unique_id=1086875462 instance=ExtResource("2_k5f4k")]
-position = Vector2(-19, 56)
-scale = Vector2(2.48, 2.48)
+position = Vector2(-8, 56.999996)
+scale = Vector2(2.1485596, 2.1485596)
