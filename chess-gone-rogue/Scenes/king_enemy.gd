@@ -18,7 +18,7 @@ func _ready() -> void:
 			move_local_y(y_movment) 
 
 			
-		
+	
 		
 		
 
