@@ -28,7 +28,6 @@ var canDash = true
 var dashDelay = 0
 var iFrames = 0
 var health = 3
-var notAttacked = true
 var enemiesLeft = 1
 
 func reduceEnemy() -> void:
@@ -114,9 +113,13 @@ func _physics_process(delta: float) -> void:
 		else:
 			velocity.x = move_toward(velocity.x, 0, SPEED * FRICTION)
 	
-	#attack_left.get_collider() == get_node(KING_PATH) or attack_right.get_collider() == get_node(KING_PATH)
-	if Input.is_action_pressed("attack") and notAttacked:
-		notAttacked = false
-		EventBus.hit_enemy.emit(get_node(KING_PATH))
+	#
+	if Input.is_action_pressed("attack"):
+		if enemiesLeft > 0:
+			if attack_left.get_collider() == get_node(KING_PATH) or attack_right.get_collider() == get_node(KING_PATH):
+				EventBus.hit_enemy.emit(get_node(KING_PATH))
+				
+			else:
+				print("Enemy not in range")
 
 	move_and_slide()
