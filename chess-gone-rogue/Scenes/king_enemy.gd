@@ -17,11 +17,9 @@ func _ready() -> void:
 		simPosition.y += range_int_y
 		
 		if int(simPosition.x) not in Array(range(0, 8)):
-			print("running X")
 			continue
 			
 		if int(simPosition.y) not in Array(range(0, 8)):
-			print("running Y")
 			continue
 			
 		#moving it by 16 pixals in any direction moves it on spuare that way
@@ -38,4 +36,5 @@ func _process(delta: float) -> void:
 	
 func tryDelete(inEnemy) -> void:
 	if get_node("./hit box") == inEnemy:
+		EventBus.enemyDied.emit()
 		queue_free()

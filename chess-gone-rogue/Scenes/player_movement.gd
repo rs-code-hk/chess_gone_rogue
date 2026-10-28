@@ -6,6 +6,8 @@ extends CharacterBody2D
 @onready var attack_right: RayCast2D = $AttackRight
 @onready var texture: AnimatedSprite2D = $AnimatedSprite2D
 
+signal enemyDied
+
 const SPEED = 100.0
 const FRICTION:float = 0.03
 const JUMP_VELOCITY = -200.0
@@ -27,19 +29,27 @@ var dashDelay = 0
 var iFrames = 0
 var health = 3
 var notAttacked = true
+var enemiesLeft = 1
+
+func reduceEnemy() -> void:
+	enemiesLeft -= 1
+
+func _ready() -> void:
+	EventBus.enemyDied.connect(reduceEnemy)
 
 func getInputs() -> Vector2:
 	return Vector2(Input.get_axis("a", "d"), Input.get_axis("w", "s"))
 
 func _physics_process(delta: float) -> void:
 	# Check getting hit
-	if ray_cast_left.get_collider() == get_node(KING_PATH) or ray_cast_right.get_collider() == get_node(KING_PATH):
-		if iFrames <= 0:
-			print("Hit!")
-			iFrames = MAX_I_FRAMES
-			health -= 1
-			if health == 0:
-				get_tree().reload_current_scene()
+	if enemiesLeft > 0:
+		if ray_cast_left.get_collider() == get_node(KING_PATH) or ray_cast_right.get_collider() == get_node(KING_PATH):
+			if iFrames <= 0:
+				print("Hit!")
+				iFrames = MAX_I_FRAMES
+				health -= 1
+				if health == 0:
+					get_tree().reload_current_scene()
 	
 	# Get movement
 	var direction = getInputs()
