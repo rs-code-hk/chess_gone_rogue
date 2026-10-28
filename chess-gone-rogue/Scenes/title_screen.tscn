@@ -14,21 +14,31 @@ grow_vertical = 2
 theme = SubResource("Theme_2hnxg")
 
 [node name="StartButton" type="Button" parent="." unique_id=198534325]
-layout_mode = 0
-offset_left = 476.0
-offset_top = 265.0
-offset_right = 665.0
-offset_bottom = 334.0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.41796875
+anchor_top = 0.44675925
+anchor_right = 0.58203125
+anchor_bottom = 0.5532407
+offset_bottom = 3.0517578e-05
+grow_horizontal = 2
+grow_vertical = 2
 text = "Start"
 script = ExtResource("1_klylv")
+metadata/_edit_use_anchors_ = true
 
 [node name="ExitButton" type="Button" parent="." unique_id=594259742]
-layout_mode = 0
-offset_left = 476.0
-offset_top = 355.0
-offset_right = 665.0
-offset_bottom = 386.0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.4175347
+anchor_top = 0.57021606
+anchor_right = 0.5833333
+anchor_bottom = 0.6180556
+offset_bottom = -3.0517578e-05
+grow_horizontal = 2
+grow_vertical = 2
 text = "EXIT"
+metadata/_edit_use_anchors_ = true
 
 [connection signal="pressed" from="StartButton" to="StartButton" method="_on_pressed"]
 [connection signal="pressed" from="ExitButton" to="StartButton" method="_on_exit_button_pressed"]
