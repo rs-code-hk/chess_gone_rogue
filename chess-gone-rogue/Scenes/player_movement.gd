@@ -107,6 +107,6 @@ func _physics_process(delta: float) -> void:
 	#attack_left.get_collider() == get_node(KING_PATH) or attack_right.get_collider() == get_node(KING_PATH)
 	if Input.is_action_pressed("attack") and notAttacked:
 		notAttacked = false
-		EventBus.hit_enemy.emit()
+		EventBus.hit_enemy.emit(get_node(KING_PATH))
 
 	move_and_slide()
