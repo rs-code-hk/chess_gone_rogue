@@ -42,9 +42,17 @@ sprite_frames = SubResource("SpriteFrames_f60y1")
 animation = &"Placeholder"
 
 [node name="RayCastLeft" type="RayCast2D" parent="." unique_id=1197997488]
+scale = Vector2(0.599998, 0.599998)
 target_position = Vector2(-8, 0)
 collide_with_areas = true
 
 [node name="RayCastRight" type="RayCast2D" parent="." unique_id=18192860]
+scale = Vector2(0.599998, 0.599998)
 target_position = Vector2(8, 0)
 collide_with_areas = true
+
+[node name="AttackRight" type="RayCast2D" parent="." unique_id=1849340282]
+target_position = Vector2(14, 0)
+
+[node name="AttackLeft" type="RayCast2D" parent="." unique_id=2044357234]
+target_position = Vector2(-14, 0)

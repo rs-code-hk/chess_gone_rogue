@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://snueulsaorte"]
 
 [ext_resource type="PackedScene" uid="uid://cd4mc4bh7q8yg" path="res://Scenes/level.tscn" id="1_ebmjs"]
-[ext_resource type="PackedScene" uid="uid://b33s1ahnhk8h5" path="res://Scenes/king_enemy.tscn" id="2_qxrlw"]
 
 [node name="Game" type="Node2D" unique_id=2137133758]
 position = Vector2(0, -63)
@@ -12,6 +11,3 @@ position = Vector2(0, -1)
 [node name="Camera2D" type="Camera2D" parent="." unique_id=686752142]
 scale = Vector2(1.9863821, 1.0689039)
 zoom = Vector2(4, 4)
-
-[node name="king enemy" parent="." unique_id=305075638 instance=ExtResource("2_qxrlw")]
-position = Vector2(8, 55)

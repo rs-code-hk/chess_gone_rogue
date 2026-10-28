@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://ddb43jiewp3fh" path="res://Assets/Environment/Board.png" id="1_tumq0"]
 [ext_resource type="PackedScene" uid="uid://vjrwb5qw6cab" path="res://Scenes/player.tscn" id="2_k5f4k"]
+[ext_resource type="PackedScene" uid="uid://b33s1ahnhk8h5" path="res://Scenes/king_enemy.tscn" id="3_6phgx"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_f7vo3"]
 distance = -13.0
@@ -47,3 +48,6 @@ shape = SubResource("WorldBoundaryShape2D_k5p3t")
 [node name="Player" parent="." unique_id=1086875462 instance=ExtResource("2_k5f4k")]
 position = Vector2(-8, 56.999996)
 scale = Vector2(2.1485596, 2.1485596)
+
+[node name="king enemy" parent="." unique_id=305075638 instance=ExtResource("3_6phgx")]
+position = Vector2(8, 55)

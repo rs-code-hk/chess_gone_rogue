@@ -2,6 +2,9 @@ extends CharacterBody2D
 
 @onready var ray_cast_left: RayCast2D = $RayCastLeft
 @onready var ray_cast_right: RayCast2D = $RayCastRight
+@onready var attack_left: RayCast2D = $AttackLeft
+@onready var attack_right: RayCast2D = $AttackRight
+@onready var texture: AnimatedSprite2D = $AnimatedSprite2D
 
 const SPEED = 100.0
 const FRICTION:float = 0.03
@@ -11,6 +14,7 @@ const DASH_DURATION = 15
 const DASH_VELOCITY = 175
 const TOTAL_DASH_DELAY = 20
 const MAX_I_FRAMES = 50
+const KING_PATH = "../king enemy/hit box"
 
 var jumps = 2
 var walljumping = 0
@@ -22,13 +26,14 @@ var canDash = true
 var dashDelay = 0
 var iFrames = 0
 var health = 3
+var notAttacked = true
 
 func getInputs() -> Vector2:
 	return Vector2(Input.get_axis("a", "d"), Input.get_axis("w", "s"))
 
 func _physics_process(delta: float) -> void:
 	# Check getting hit
-	if ray_cast_left.get_collider() == get_node("../../king enemy/hit box") or ray_cast_right.get_collider() == get_node("../../king enemy/hit box"):
+	if ray_cast_left.get_collider() == get_node(KING_PATH) or ray_cast_right.get_collider() == get_node(KING_PATH):
 		if iFrames <= 0:
 			print("Hit!")
 			iFrames = MAX_I_FRAMES
@@ -38,6 +43,7 @@ func _physics_process(delta: float) -> void:
 	
 	# Get movement
 	var direction = getInputs()
+	texture.flip_h = false if direction.x == 1 else true if direction.x == -1 else texture.flip_h
 	if direction.x != 0:
 		lastHorizontalDirection = direction.x
 	if dashing == false and canDash:
@@ -59,6 +65,7 @@ func _physics_process(delta: float) -> void:
 	dashFrames -= 1
 	dashDelay -= 1
 	iFrames -= 1
+	#if iFrames > 0: print(str(iFrames) + " iFrames left")
 	
 	# Get Jump Count
 	if is_on_wall():
@@ -96,5 +103,11 @@ func _physics_process(delta: float) -> void:
 			velocity.x = direction[0] * SPEED
 		else:
 			velocity.x = move_toward(velocity.x, 0, SPEED * FRICTION)
+	
+	#attack_left.get_collider() == get_node(KING_PATH) or attack_right.get_collider() == get_node(KING_PATH)
+	if Input.is_action_pressed("attack") and notAttacked:
+		notAttacked = false
+		print("Attacking")
+		get_node(KING_PATH).queue_free()
 
 	move_and_slide()
