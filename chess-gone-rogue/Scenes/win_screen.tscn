@@ -1,0 +1,61 @@
+[gd_scene format=3 uid="uid://c07iee0i44yxd"]
+
+[ext_resource type="Script" uid="uid://bg836ibybjoc5" path="res://Scenes/exit.gd" id="1_l5sol"]
+
+[node name="win screen" type="Control" unique_id=1098397766]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="main menu" type="Button" parent="." unique_id=2001324424]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -222.0
+offset_right = 100.0
+offset_bottom = -122.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Main Menu"
+
+[node name="exit" type="Button" parent="." unique_id=1506884044]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -99.0
+offset_top = 79.0
+offset_right = 101.0
+offset_bottom = 179.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Exit"
+script = ExtResource("1_l5sol")
+
+[node name="quick restart" type="Button" parent="." unique_id=1550351789]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -101.0
+offset_top = -68.0
+offset_right = 99.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Restart level"
+
+[connection signal="pressed" from="main menu" to="exit" method="_on_main_menu_pressed"]
+[connection signal="pressed" from="exit" to="exit" method="_on_pressed"]
+[connection signal="pressed" from="quick restart" to="exit" method="_on_quick_restart_pressed"]
