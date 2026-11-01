@@ -63,6 +63,7 @@ collide_with_areas = true
 [node name="AttackUp" type="RayCast2D" parent="." unique_id=1147732399]
 target_position = Vector2(0, -9)
 collide_with_areas = true
+
 [node name="AttackDown" type="RayCast2D" parent="." unique_id=1620119018]
 target_position = Vector2(0, 9)
 collide_with_areas = true
