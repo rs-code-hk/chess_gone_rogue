@@ -5,6 +5,7 @@ extends CharacterBody2D
 @onready var attack_left: RayCast2D = $AttackLeft
 @onready var attack_right: RayCast2D = $AttackRight
 @onready var texture: AnimatedSprite2D = $AnimatedSprite2D
+@onready var slash: Sprite2D = $Slash
 
 signal enemyDied
 
@@ -17,18 +18,22 @@ const DASH_VELOCITY = 175
 const TOTAL_DASH_DELAY = 20
 const MAX_I_FRAMES = 50
 const KING_PATH = "../king enemy/hit box"
+const SLASH_DURATION = 20
+const SLASH_DELAY = 20
+const SLASH_LENGTH = 7
 
 var jumps = 2
 var walljumping = 0
 var dashing = false
 var dashFrames = 0
-var dashingDirection = Vector2(0, 0)
+var lastDirection = Vector2(0, 0)
 var lastHorizontalDirection = 1
 var canDash = true
 var dashDelay = 0
 var iFrames = 0
 var health = 3
 var enemiesLeft = 1
+var slashFrames = 0
 
 func reduceEnemy() -> void:
 	enemiesLeft -= 1
@@ -53,15 +58,20 @@ func _physics_process(delta: float) -> void:
 	# Get movement
 	var direction = getInputs()
 	texture.flip_h = false if direction.x == 1 else true if direction.x == -1 else texture.flip_h
+	if slashFrames > 0:
+		slash.show()
+	else:
+		slash.hide()
+	
 	if direction.x != 0:
 		lastHorizontalDirection = direction.x
 	if dashing == false and canDash:
 		dashing = Input.is_action_just_pressed("dash")
 		if direction == Vector2(0, 0):
-			dashingDirection = Vector2(lastHorizontalDirection, 0)
+			lastDirection = Vector2(lastHorizontalDirection, 0)
 		
 		else:
-			dashingDirection = direction
+			lastDirection = direction
 			
 		if dashing:
 			canDash = false
@@ -74,7 +84,7 @@ func _physics_process(delta: float) -> void:
 	dashFrames -= 1
 	dashDelay -= 1
 	iFrames -= 1
-	#if iFrames > 0: print(str(iFrames) + " iFrames left")
+	slashFrames -= 1
 	
 	# Get Jump Count
 	if is_on_wall():
@@ -86,7 +96,7 @@ func _physics_process(delta: float) -> void:
 		if dashDelay < 1: canDash = true
 		
 	if dashing:
-		velocity = Vector2(dashingDirection.x * DASH_VELOCITY, dashingDirection.y * DASH_VELOCITY)
+		velocity = Vector2(lastDirection.x * DASH_VELOCITY, lastDirection.y * DASH_VELOCITY)
 		if dashFrames == 0:
 			velocity = Vector2(0, 0)
 			dashDelay = TOTAL_DASH_DELAY
@@ -113,13 +123,26 @@ func _physics_process(delta: float) -> void:
 		else:
 			velocity.x = move_toward(velocity.x, 0, SPEED * FRICTION)
 	
-	#
-	if Input.is_action_pressed("attack"):
+	if Input.is_action_pressed("attack") and slashFrames < -SLASH_DELAY:
+		slashFrames = SLASH_DURATION
+		var slashDirection = direction
+		if direction == Vector2(0, 0):
+				slashDirection = lastDirection
+				
+		if slashDirection.y != 0:
+			slash.flip_h = false
+			slash.rotation_degrees = [null, 90, 270][slashDirection.y]
+			slash.position.x = 0
+			slash.position.y = SLASH_LENGTH * slashDirection.y
+		else:
+			slash.rotation_degrees = 0
+			slash.flip_h = [null, false, true][slashDirection.x]
+			slash.position.x = SLASH_LENGTH * slashDirection.x
+			slash.position.y = 0
+			
 		if enemiesLeft > 0:
 			if attack_left.get_collider() == get_node(KING_PATH) or attack_right.get_collider() == get_node(KING_PATH):
 				EventBus.hit_enemy.emit(get_node(KING_PATH))
 				
-			else:
-				print("Enemy not in range")
 
 	move_and_slide()
