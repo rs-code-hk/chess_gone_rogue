@@ -2,8 +2,12 @@ extends CharacterBody2D
 
 @onready var ray_cast_left: RayCast2D = $RayCastLeft
 @onready var ray_cast_right: RayCast2D = $RayCastRight
+@onready var ray_cast_down: RayCast2D = $RayCastDown
+@onready var ray_cast_up: RayCast2D = $RayCastUp
 @onready var attack_left: RayCast2D = $AttackLeft
 @onready var attack_right: RayCast2D = $AttackRight
+@onready var attack_down: RayCast2D = $AttackDown
+@onready var attack_up: RayCast2D = $AttackUp
 @onready var texture: AnimatedSprite2D = $AnimatedSprite2D
 @onready var slash: Sprite2D = $Slash
 
@@ -34,6 +38,7 @@ var iFrames = 0
 var health = 3
 var enemiesLeft = 1
 var slashFrames = 0
+var slashDirection = Vector2(0, 0)
 
 func reduceEnemy() -> void:
 	enemiesLeft -= 1
@@ -44,10 +49,49 @@ func _ready() -> void:
 func getInputs() -> Vector2:
 	return Vector2(Input.get_axis("a", "d"), Input.get_axis("w", "s"))
 
+func checkHit():
+	var isHit = false
+	if enemiesLeft > 0:
+		if ray_cast_down.get_collider() == get_node(KING_PATH):
+			isHit = true
+		if ray_cast_up.get_collider() == get_node(KING_PATH):
+			isHit = true
+		if ray_cast_left.get_collider() == get_node(KING_PATH):
+			isHit = true
+		if ray_cast_right.get_collider() == get_node(KING_PATH):
+			isHit = true
+	
+	return isHit
+	
+func isHitting(slashDirection:Vector2) -> Node:
+	if slashDirection.y == -1:
+		print(attack_down.get_collider())
+		return attack_down.get_collider()
+	if slashDirection.y == 1:
+		return attack_up.get_collider()
+		
+	if slashDirection.x == -1:
+		return attack_left.get_collider()
+	if slashDirection.x == 1:
+		return attack_right.get_collider()
+	
+	return null
+
 func _physics_process(delta: float) -> void:
+	# Get temporary variables
+	var hit = checkHit()
+	var direction = getInputs()
+	
+	# Reduce timers
+	walljumping -= 1
+	dashFrames -= 1
+	dashDelay -= 1
+	iFrames -= 1
+	slashFrames -= 1
+	
 	# Check getting hit
 	if enemiesLeft > 0:
-		if ray_cast_left.get_collider() == get_node(KING_PATH) or ray_cast_right.get_collider() == get_node(KING_PATH):
+		if hit:
 			if iFrames <= 0:
 				print("Hit!")
 				iFrames = MAX_I_FRAMES
@@ -56,12 +100,7 @@ func _physics_process(delta: float) -> void:
 					get_tree().reload_current_scene()
 	
 	# Get movement
-	var direction = getInputs()
 	texture.flip_h = false if direction.x == 1 else true if direction.x == -1 else texture.flip_h
-	if slashFrames > 0:
-		slash.show()
-	else:
-		slash.hide()
 	
 	if direction.x != 0:
 		lastHorizontalDirection = direction.x
@@ -79,12 +118,6 @@ func _physics_process(delta: float) -> void:
 			
 	if dashFrames == 0:
 		dashing = false
-
-	walljumping -= 1
-	dashFrames -= 1
-	dashDelay -= 1
-	iFrames -= 1
-	slashFrames -= 1
 	
 	# Get Jump Count
 	if is_on_wall():
@@ -123,9 +156,10 @@ func _physics_process(delta: float) -> void:
 		else:
 			velocity.x = move_toward(velocity.x, 0, SPEED * FRICTION)
 	
+	# Attacking
 	if Input.is_action_pressed("attack") and slashFrames < -SLASH_DELAY:
 		slashFrames = SLASH_DURATION
-		var slashDirection = direction
+		slashDirection = direction
 		if direction == Vector2(0, 0):
 				slashDirection = lastDirection
 				
@@ -139,10 +173,14 @@ func _physics_process(delta: float) -> void:
 			slash.flip_h = [null, false, true][slashDirection.x]
 			slash.position.x = SLASH_LENGTH * slashDirection.x
 			slash.position.y = 0
-			
-		if enemiesLeft > 0:
-			if attack_left.get_collider() == get_node(KING_PATH) or attack_right.get_collider() == get_node(KING_PATH):
-				EventBus.hit_enemy.emit(get_node(KING_PATH))
 				
+	if slashFrames > 0:
+		slash.show()
+		if enemiesLeft > 0:
+			var enemyHit = isHitting(slashDirection)
+			if enemyHit:
+				EventBus.hit_enemy.emit(get_node(KING_PATH))
+	else:
+		slash.hide()
 
 	move_and_slide()
