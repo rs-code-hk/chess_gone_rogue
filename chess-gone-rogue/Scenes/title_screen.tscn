@@ -40,5 +40,48 @@ grow_vertical = 2
 text = "EXIT"
 metadata/_edit_use_anchors_ = true
 
+[node name="Label" type="Label" parent="." unique_id=1618797075]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -71.0
+offset_top = 217.0
+offset_right = 72.0
+offset_bottom = 240.0
+grow_horizontal = 2
+text = "Chess Gone Rouge"
+
+[node name="Label2" type="Label" parent="." unique_id=961878774]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 723.0
+offset_top = -42.0
+offset_right = 1128.0
+offset_bottom = 86.5
+grow_vertical = 2
+text = "Credits:
+Rosie
+Sonny
+Jacob"
+
+[node name="Label3" type="Label" parent="." unique_id=1957738234]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 29.0
+offset_top = -40.0
+offset_right = 434.0
+offset_bottom = 88.5
+grow_vertical = 2
+text = "How to play:
+movement is WASD
+to attack you use the J key
+to dash you use the K key
+you can wall jump by jumping while against a wall"
+
 [connection signal="pressed" from="StartButton" to="StartButton" method="_on_pressed"]
 [connection signal="pressed" from="ExitButton" to="StartButton" method="_on_exit_button_pressed"]
