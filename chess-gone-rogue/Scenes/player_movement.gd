@@ -14,7 +14,8 @@ extends CharacterBody2D
 signal enemyDied
 
 const SPEED = 100.0
-const FRICTION:float = 0.03
+# Increase for less slide, decrease for more
+const FRICTION:float = 0.05
 const JUMP_VELOCITY = -200.0
 const WALLJUMP_DELAY = 10
 const DASH_DURATION = 15
@@ -25,6 +26,8 @@ const KING_PATH = "../king enemy/hit box"
 const SLASH_DURATION = 20
 const SLASH_DELAY = 20
 const SLASH_LENGTH = 7
+const KNOCKBACK = 50
+const FREEZE_TOTAL = 30
 
 var jumps = 2
 var walljumping = 0
@@ -39,9 +42,12 @@ var health = 3
 var enemiesLeft = 1
 var slashFrames = 0
 var slashDirection = Vector2(0, 0)
+var noControl = 0
 
 func reduceEnemy() -> void:
 	enemiesLeft -= 1
+	if enemiesLeft == 0:
+		get_tree().change_scene_to_file("res://Scenes/win_screen.tscn")
 
 func _ready() -> void:
 	EventBus.enemyDied.connect(reduceEnemy)
@@ -57,18 +63,22 @@ func checkHit():
 		if ray_cast_up.get_collider() == get_node(KING_PATH):
 			isHit = true
 		if ray_cast_left.get_collider() == get_node(KING_PATH):
+			velocity.x += KNOCKBACK
 			isHit = true
 		if ray_cast_right.get_collider() == get_node(KING_PATH):
+			velocity.x += -KNOCKBACK
 			isHit = true
+			
+	if isHit:
+		noControl = FREEZE_TOTAL
 	
 	return isHit
 	
 func isHitting(slashDirection:Vector2) -> Node:
 	if slashDirection.y == -1:
-		print(attack_down.get_collider())
-		return attack_down.get_collider()
-	if slashDirection.y == 1:
 		return attack_up.get_collider()
+	if slashDirection.y == 1:
+		return attack_down.get_collider()
 		
 	if slashDirection.x == -1:
 		return attack_left.get_collider()
@@ -88,6 +98,7 @@ func _physics_process(delta: float) -> void:
 	dashDelay -= 1
 	iFrames -= 1
 	slashFrames -= 1
+	noControl -= 1
 	
 	# Check getting hit
 	if enemiesLeft > 0:
@@ -151,7 +162,7 @@ func _physics_process(delta: float) -> void:
 				if ray_cast_right.is_colliding():
 					velocity.x += -SPEED
 					
-		if direction.x != 0 and walljumping < 1:
+		if direction.x != 0 and walljumping < 1 and noControl < 1:
 			velocity.x = direction[0] * SPEED
 		else:
 			velocity.x = move_toward(velocity.x, 0, SPEED * FRICTION)
