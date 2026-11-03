@@ -16,6 +16,7 @@ signal enemyDied
 const SPEED = 100.0
 # Increase for less slide, decrease for more
 const FRICTION:float = 0.05
+const GRAVITY = 0.8
 const JUMP_VELOCITY = -200.0
 const WALLJUMP_DELAY = 10
 const DASH_DURATION = 15
@@ -51,6 +52,7 @@ func reduceEnemy() -> void:
 
 func _ready() -> void:
 	EventBus.enemyDied.connect(reduceEnemy)
+	slash.hide()
 
 func getInputs() -> Vector2:
 	return Vector2(Input.get_axis("a", "d"), Input.get_axis("w", "s"))
@@ -73,20 +75,47 @@ func checkHit():
 		noControl = FREEZE_TOTAL
 	
 	return isHit
-	
-func isHitting(slashDirection:Vector2) -> Node:
-	if slashDirection.y == -1:
-		return attack_up.get_collider()
-	if slashDirection.y == 1:
-		return attack_down.get_collider()
-		
-	if slashDirection.x == -1:
-		return attack_left.get_collider()
-	if slashDirection.x == 1:
-		return attack_right.get_collider()
-	
-	return null
 
+func checkHitting(direction:Vector2):
+	var collider = null
+	if direction.y == -1:
+		collider = attack_up.get_collider()
+	elif direction.y == 1:
+		collider = attack_down.get_collider()
+	else:
+		if direction.x == -1:
+			collider = attack_left.get_collider()
+		if direction.x == 1:
+			collider = attack_right.get_collider()
+			
+	if slashFrames > 0:
+		slash.show()
+		if enemiesLeft > 0:
+			if collider:
+				EventBus.hit_enemy.emit(collider)
+				
+	else:
+		slash.hide()
+
+func attack(direction:Vector2) -> Vector2:
+	slashFrames = SLASH_DURATION
+	var slashDirection = direction
+	if direction == Vector2(0, 0):
+			slashDirection = lastDirection
+			
+	if slashDirection.y != 0:
+		slash.flip_h = false
+		slash.rotation_degrees = [null, 90, 270][slashDirection.y]
+		slash.position.x = 0
+		slash.position.y = SLASH_LENGTH * slashDirection.y
+	else:
+		slash.rotation_degrees = 0
+		slash.flip_h = [null, false, true][slashDirection.x]
+		slash.position.x = SLASH_LENGTH * slashDirection.x
+		slash.position.y = 0
+		
+	return slashDirection
+		
 func _physics_process(delta: float) -> void:
 	# Get temporary variables
 	var hit = checkHit()
@@ -104,7 +133,6 @@ func _physics_process(delta: float) -> void:
 	if enemiesLeft > 0:
 		if hit:
 			if iFrames <= 0:
-				print("Hit!")
 				iFrames = MAX_I_FRAMES
 				health -= 1
 				if health == 0:
@@ -148,7 +176,7 @@ func _physics_process(delta: float) -> void:
 	else:
 	# Add the gravity.
 		if not is_on_floor():
-			velocity += get_gravity() * delta
+			velocity.y *= GRAVITY
 
 		# Handle jump.
 		if Input.is_action_just_pressed("ui_accept") and jumps > 0:
@@ -168,30 +196,9 @@ func _physics_process(delta: float) -> void:
 			velocity.x = move_toward(velocity.x, 0, SPEED * FRICTION)
 	
 	# Attacking
+	var slashDirection = Vector2(0, 0)
 	if Input.is_action_pressed("attack") and slashFrames < -SLASH_DELAY:
-		slashFrames = SLASH_DURATION
-		slashDirection = direction
-		if direction == Vector2(0, 0):
-				slashDirection = lastDirection
-				
-		if slashDirection.y != 0:
-			slash.flip_h = false
-			slash.rotation_degrees = [null, 90, 270][slashDirection.y]
-			slash.position.x = 0
-			slash.position.y = SLASH_LENGTH * slashDirection.y
-		else:
-			slash.rotation_degrees = 0
-			slash.flip_h = [null, false, true][slashDirection.x]
-			slash.position.x = SLASH_LENGTH * slashDirection.x
-			slash.position.y = 0
-				
-	if slashFrames > 0:
-		slash.show()
-		if enemiesLeft > 0:
-			var enemyHit = isHitting(slashDirection)
-			if enemyHit:
-				EventBus.hit_enemy.emit(get_node(KING_PATH))
-	else:
-		slash.hide()
+		slashDirection = attack(direction)
+	checkHitting(slashDirection)
 
 	move_and_slide()
