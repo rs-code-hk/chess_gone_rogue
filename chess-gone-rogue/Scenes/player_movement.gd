@@ -16,7 +16,8 @@ signal enemyDied
 const SPEED = 100.0
 # Increase for less slide, decrease for more
 const FRICTION:float = 0.05
-const GRAVITY = 0.8
+const AIR_FRICTION = 0.02
+const GRAVITY = 0.02
 const JUMP_VELOCITY = -200.0
 const WALLJUMP_DELAY = 10
 const DASH_DURATION = 15
@@ -176,7 +177,7 @@ func _physics_process(delta: float) -> void:
 	else:
 	# Add the gravity.
 		if not is_on_floor():
-			velocity.y *= GRAVITY
+			velocity += get_gravity() * GRAVITY
 
 		# Handle jump.
 		if Input.is_action_just_pressed("ui_accept") and jumps > 0:
@@ -193,7 +194,7 @@ func _physics_process(delta: float) -> void:
 		if direction.x != 0 and walljumping < 1 and noControl < 1:
 			velocity.x = direction[0] * SPEED
 		else:
-			velocity.x = move_toward(velocity.x, 0, SPEED * FRICTION)
+			velocity.x = move_toward(velocity.x, 0, SPEED * (FRICTION if is_on_floor() else AIR_FRICTION))
 	
 	# Attacking
 	var slashDirection = Vector2(0, 0)
