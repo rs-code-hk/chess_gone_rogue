@@ -2,15 +2,14 @@
 
 [ext_resource type="Script" uid="uid://b0twdkrwq6c" path="res://control.gd" id="1_2i7ro"]
 
-[node name="Control" type="Control" unique_id=1715463415]
+[node name="StopWhatch" type="Control" unique_id=1715463415]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("1_2i7ro")
 
-[node name="Label" type="Label" parent="." unique_id=479526780]
+[node name="timer_display" type="Label" parent="." unique_id=479526780]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
-text = "Timer"
