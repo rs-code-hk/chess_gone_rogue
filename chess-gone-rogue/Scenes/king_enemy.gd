@@ -1,13 +1,13 @@
 extends Node2D
 
+
+
 signal enemy_hit(enemy)
 
 @export var piece = 1
 var chessPosition = Vector2(4, 7)
- 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	
 	if piece == 1:
 		EventBus.hit_enemy.connect(tryDelete)
 		await get_tree().create_timer(3.0).timeout
@@ -32,7 +32,16 @@ func _ready() -> void:
 			chessPosition = simPosition
 			await get_tree().create_timer(3.0).timeout
 	elif piece == 2:
-		var player_position = get_node("../player").global.position
+		while true:
+			var x_or_y = randf()
+			if x_or_y > 0.5:
+				var how_many_squaresx = randi_range(-8, 8)
+				print("move x")
+			elif x_or_y < 0.5:
+				var how_many_squaresy = randi_range(-8, 8)
+				print("move y")
+			await get_tree().create_timer(4).timeout
+			
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
