@@ -74,9 +74,8 @@ hit_from_inside = true
 collide_with_areas = true
 
 [node name="AttackDown" type="RayCast2D" parent="." unique_id=1620119018]
-target_position = Vector2(0, 12)
-hit_from_inside = true
-collide_with_areas = true
+z_index = -1
+target_position = Vector2(0, 15)
 
 [node name="Slash" type="Sprite2D" parent="." unique_id=1704199297]
 position = Vector2(-2.3841858e-07, -0.9999995)

@@ -30,6 +30,7 @@ const SLASH_DELAY = 20
 const SLASH_LENGTH = 7
 const KNOCKBACK = 50
 const FREEZE_TOTAL = 10
+const POGO_BOOST = -300
 
 var jumps = 2
 var walljumping = 0
@@ -41,7 +42,7 @@ var canDash = true
 var dashDelay = 0
 var iFrames = 0
 var health = 3
-var enemiesLeft = 2
+var enemiesLeft = 1
 var slashFrames = 0
 var slashDirection = Vector2(0, 0)
 var noControl = 0
@@ -82,9 +83,10 @@ func checkHitting(direction:Vector2):
 	if direction.y == -1:
 		collider = attack_up.get_collider()
 	elif direction.y == 1:
-		collider = attack_down.get_collider()
-		if collider != null:
-			velocity.y += JUMP_VELOCITY
+		collider = attack_down
+		print(collider)
+		if collider not in [get_node(""), get_node("../bottom boundary"), get_node("./AttackDown")]:
+			velocity.y += POGO_BOOST
 			jumps = 1
 			canDash = true
 	else:
