@@ -50,5 +50,5 @@ position = Vector2(-8, 56.999996)
 scale = Vector2(2.1485596, 2.1485596)
 
 [node name="king enemy" parent="." unique_id=305075638 instance=ExtResource("3_6phgx")]
-position = Vector2(8, 55)
+position = Vector2(8, 40)
 piece = 2
