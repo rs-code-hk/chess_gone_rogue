@@ -33,7 +33,6 @@ func _ready() -> void:
 			chessPosition = simPosition
 			await get_tree().create_timer(3.0).timeout
 	elif piece == 2:
-		
 		sprite.texture = load("res://Assets/Pieces/Rook.png")
 		while true:
 			var x_or_y = randf()
