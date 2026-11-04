@@ -126,6 +126,7 @@ func attack(direction:Vector2) -> Vector2:
 func _physics_process(delta: float) -> void:
 	# Get temporary variables
 	var hit = checkHit()
+	print("e")
 	var direction = getInputs()
 	
 	# Reduce timers
