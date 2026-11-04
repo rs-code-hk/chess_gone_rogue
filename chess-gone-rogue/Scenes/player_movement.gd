@@ -29,7 +29,7 @@ const SLASH_DURATION = 20
 const SLASH_DELAY = 20
 const SLASH_LENGTH = 7
 const KNOCKBACK = 50
-const FREEZE_TOTAL = 30
+const FREEZE_TOTAL = 10
 
 var jumps = 2
 var walljumping = 0
@@ -41,7 +41,7 @@ var canDash = true
 var dashDelay = 0
 var iFrames = 0
 var health = 3
-var enemiesLeft = 1
+var enemiesLeft = 2
 var slashFrames = 0
 var slashDirection = Vector2(0, 0)
 var noControl = 0
@@ -83,6 +83,10 @@ func checkHitting(direction:Vector2):
 		collider = attack_up.get_collider()
 	elif direction.y == 1:
 		collider = attack_down.get_collider()
+		if collider != null:
+			velocity.y += JUMP_VELOCITY
+			jumps = 1
+			canDash = true
 	else:
 		if direction.x == -1:
 			collider = attack_left.get_collider()
