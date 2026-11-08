@@ -143,7 +143,7 @@ func _physics_process(delta: float) -> void:
 				iFrames = MAX_I_FRAMES
 				health -= 1
 				if health == 0:
-					get_tree().reload_current_scene()
+					get_tree().change_scene_to_file("res://Scenes/gameover.tscn")
 	
 	# Get movement
 	texture.flip_h = false if direction.x == 1 else true if direction.x == -1 else texture.flip_h
