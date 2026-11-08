@@ -1,24 +1,9 @@
 [gd_scene format=3 uid="uid://snueulsaorte"]
 
 [ext_resource type="PackedScene" uid="uid://cd4mc4bh7q8yg" path="res://Scenes/level.tscn" id="1_ebmjs"]
-[ext_resource type="Script" uid="uid://dl42n2340xka3" path="res://Scenes/game_manager.gd" id="2_qxrlw"]
-[ext_resource type="PackedScene" uid="uid://bb10pxtex4k8i" path="res://Scenes/Stopwatch.tscn" id="3_wrm1d"]
 
 [node name="Game" type="Node2D" unique_id=2137133758]
 position = Vector2(0, -63)
 
 [node name="Level" parent="." unique_id=977631278 instance=ExtResource("1_ebmjs")]
 position = Vector2(0, -1)
-
-[node name="Camera2D" type="Camera2D" parent="." unique_id=686752142]
-scale = Vector2(1.9863821, 1.0689039)
-zoom = Vector2(4, 4)
-
-[node name="GameManager" type="Node" parent="." unique_id=435895693]
-script = ExtResource("2_qxrlw")
-
-[node name="StopWhatch" parent="." unique_id=1715463415 instance=ExtResource("3_wrm1d")]
-offset_left = -32.0
-offset_top = -82.0
-offset_right = 8.0
-offset_bottom = -66.0

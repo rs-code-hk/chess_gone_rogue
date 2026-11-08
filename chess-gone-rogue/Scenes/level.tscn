@@ -3,6 +3,8 @@
 [ext_resource type="Texture2D" uid="uid://ddb43jiewp3fh" path="res://Assets/Environment/Board.png" id="1_tumq0"]
 [ext_resource type="PackedScene" uid="uid://vjrwb5qw6cab" path="res://Scenes/player.tscn" id="2_k5f4k"]
 [ext_resource type="PackedScene" uid="uid://b33s1ahnhk8h5" path="res://Scenes/king_enemy.tscn" id="3_6phgx"]
+[ext_resource type="Script" uid="uid://dl42n2340xka3" path="res://Scenes/game_manager.gd" id="4_wqkje"]
+[ext_resource type="PackedScene" uid="uid://bb10pxtex4k8i" path="res://Scenes/Stopwatch.tscn" id="5_0f350"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_f7vo3"]
 distance = -13.0
@@ -52,3 +54,16 @@ scale = Vector2(2.1485596, 2.1485596)
 [node name="king enemy" parent="." unique_id=305075638 instance=ExtResource("3_6phgx")]
 position = Vector2(8, 40)
 piece = 2
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1990436900]
+scale = Vector2(1.9863821, 1.0689039)
+zoom = Vector2(4, 4)
+
+[node name="GameManager" type="Node" parent="." unique_id=723802361]
+script = ExtResource("4_wqkje")
+
+[node name="StopWhatch" parent="." unique_id=1715463415 instance=ExtResource("5_0f350")]
+offset_left = -32.0
+offset_top = -82.0
+offset_right = 8.0
+offset_bottom = -66.0
