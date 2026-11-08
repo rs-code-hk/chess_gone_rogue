@@ -76,18 +76,22 @@ texture = ExtResource("3_6t5aa")
 scale = Vector2(0.25, 0.2)
 shape = SubResource("RectangleShape2D_3lynd")
 target_position = Vector2(40, 0)
+collide_with_areas = true
 
 [node name="AttackLeft" type="ShapeCast2D" parent="." unique_id=420841297]
 scale = Vector2(0.25, 0.2)
 shape = SubResource("RectangleShape2D_v2g0j")
 target_position = Vector2(-40, 0)
+collide_with_areas = true
 
 [node name="AttackDown" type="ShapeCast2D" parent="." unique_id=153255635]
 scale = Vector2(0.2, 0.25)
 shape = SubResource("RectangleShape2D_33cd3")
 target_position = Vector2(0, 40)
+collide_with_areas = true
 
 [node name="AttackUp" type="ShapeCast2D" parent="." unique_id=1156722171]
 scale = Vector2(0.2, 0.25)
 shape = SubResource("RectangleShape2D_npmfu")
 target_position = Vector2(0, -40)
+collide_with_areas = true
