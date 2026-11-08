@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://c07iee0i44yxd"]
 
+[ext_resource type="Script" uid="uid://ch15kib7k4nxw" path="res://Scenes/win_screen.gd" id="1_a00f1"]
 [ext_resource type="Script" uid="uid://bg836ibybjoc5" path="res://Scenes/exit.gd" id="1_l5sol"]
 
 [node name="win screen" type="Control" unique_id=1098397766]
@@ -9,6 +10,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_a00f1")
 
 [node name="main menu" type="Button" parent="." unique_id=2001324424]
 layout_mode = 1
@@ -55,6 +57,16 @@ offset_bottom = 32.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "Restart level"
+
+[node name="timegrade" type="Label" parent="." unique_id=441319825]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -223.0
+offset_right = 385.0
+offset_bottom = 197.0
+grow_vertical = 2
 
 [connection signal="pressed" from="main menu" to="exit" method="_on_main_menu_pressed"]
 [connection signal="pressed" from="exit" to="exit" method="_on_pressed"]

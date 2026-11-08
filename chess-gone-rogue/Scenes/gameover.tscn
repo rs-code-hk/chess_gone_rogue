@@ -1,0 +1,60 @@
+[gd_scene format=3 uid="uid://wpnxbj421xmf"]
+
+[ext_resource type="Script" uid="uid://ccj8sy624j82v" path="res://Scenes/restart.gd" id="1_fg4p2"]
+
+[node name="gameover" type="Control" unique_id=1705080038]
+modulate = Color(0.8112549, 0, 0.028761974, 1)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="." unique_id=1134717618]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -234.0
+offset_right = 234.0
+offset_bottom = 134.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 150
+text = "You died"
+
+[node name="restart" type="Button" parent="." unique_id=360790234]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -179.0
+offset_top = -182.0
+offset_right = 179.0
+offset_bottom = -37.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 100
+text = "Restart"
+script = ExtResource("1_fg4p2")
+
+[node name="main menu" type="Button" parent="." unique_id=1011211816]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -276.5
+offset_top = -72.5
+offset_right = 276.5
+offset_bottom = 72.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 100
+text = "Main Menu"
+
+[connection signal="pressed" from="restart" to="restart" method="_on_pressed"]
+[connection signal="pressed" from="main menu" to="restart" method="_on_main_menu_pressed"]
