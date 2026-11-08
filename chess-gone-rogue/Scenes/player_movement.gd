@@ -4,10 +4,10 @@ extends CharacterBody2D
 @onready var ray_cast_right: RayCast2D = $RayCastRight
 @onready var ray_cast_down: RayCast2D = $RayCastDown
 @onready var ray_cast_up: RayCast2D = $RayCastUp
-@onready var attack_left: RayCast2D = $AttackLeft
-@onready var attack_right: RayCast2D = $AttackRight
-@onready var attack_down: RayCast2D = $AttackDown
-@onready var attack_up: RayCast2D = $AttackUp
+@onready var attack_left: ShapeCast2D = $AttackLeft
+@onready var attack_right: ShapeCast2D = $AttackRight
+@onready var attack_down: ShapeCast2D = $AttackDown
+@onready var attack_up: ShapeCast2D = $AttackUp
 @onready var texture: AnimatedSprite2D = $AnimatedSprite2D
 @onready var slash: Sprite2D = $Slash
 
@@ -81,9 +81,9 @@ func checkHit():
 func checkHitting(direction:Vector2):
 	var collider = null
 	if direction.y == -1:
-		collider = attack_up.get_collider()
+		collider = attack_up.get_collider(0)
 	elif direction.y == 1:
-		collider = attack_down
+		collider = attack_down.get_collider(0)
 		print(collider)
 		if collider not in [get_node(""), get_node("../bottom boundary"), get_node("./AttackDown")]:
 			velocity.y += POGO_BOOST
@@ -91,9 +91,9 @@ func checkHitting(direction:Vector2):
 			canDash = true
 	else:
 		if direction.x == -1:
-			collider = attack_left.get_collider()
+			collider = attack_left.get_collider(0)
 		if direction.x == 1:
-			collider = attack_right.get_collider()
+			collider = attack_right.get_collider(0)
 			
 	if slashFrames > 0:
 		slash.show()
@@ -126,7 +126,6 @@ func attack(direction:Vector2) -> Vector2:
 func _physics_process(delta: float) -> void:
 	# Get temporary variables
 	var hit = checkHit()
-	print("e")
 	var direction = getInputs()
 	
 	# Reduce timers
