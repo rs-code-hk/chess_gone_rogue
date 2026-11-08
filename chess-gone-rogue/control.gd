@@ -31,3 +31,4 @@ func stop() -> void:
 func reset() -> void:
 	time_elapsed = 0.0
 	update_ui()
+	
