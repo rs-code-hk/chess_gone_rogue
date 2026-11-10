@@ -11,8 +11,8 @@ func _ready() -> void:
 	EventBus.hit_enemy.connect(tryDelete)
 	if piece == 1:
 		sprite.texture = load("res://Assets/Pieces/King.png")
-		await get_tree().create_timer(3.0).timeout
 		while true:
+			await get_tree().create_timer(2.0).timeout
 			var range_int_x = randi_range(-1, 1)
 			var range_int_y = randi_range(-1, 1)
 			
@@ -31,7 +31,7 @@ func _ready() -> void:
 			position.x = simPosition.x * 16 - 56
 			position.y = simPosition.y * 16 - 56
 			chessPosition = simPosition
-			await get_tree().create_timer(3.0).timeout
+			
 	elif piece == 2:
 		sprite.texture = load("res://Assets/Pieces/Rook.png")
 		while true:
@@ -48,7 +48,7 @@ func _ready() -> void:
 				if how_far_move in [56,40,24,8,-8,-24,-40,-56]: 
 					position.y = how_far_move
 					print("move y")
-			await get_tree().create_timer(3).timeout
+			await get_tree().create_timer(2).timeout
 			
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
