@@ -1,0 +1,72 @@
+[gd_scene format=3 uid="uid://da6yr312w3doe"]
+
+[ext_resource type="Texture2D" uid="uid://ddb43jiewp3fh" path="res://Assets/Environment/Board.png" id="1_v3rpw"]
+[ext_resource type="PackedScene" uid="uid://vjrwb5qw6cab" path="res://Scenes/player.tscn" id="2_1q6tm"]
+[ext_resource type="Script" uid="uid://dl42n2340xka3" path="res://Scenes/game_manager.gd" id="3_v36qu"]
+[ext_resource type="PackedScene" uid="uid://bb10pxtex4k8i" path="res://Scenes/Stopwatch.tscn" id="4_cggpd"]
+[ext_resource type="PackedScene" uid="uid://b33s1ahnhk8h5" path="res://Scenes/king_enemy.tscn" id="5_v36qu"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_055b2"]
+distance = -13.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_2mgoq"]
+distance = -13.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_uhnj4"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_42uki"]
+
+[node name="level 2" type="Node2D" unique_id=735044416]
+
+[node name="Board Display" type="Sprite2D" parent="." unique_id=1259790454]
+texture = ExtResource("1_v3rpw")
+
+[node name="bottom boundary" type="StaticBody2D" parent="." unique_id=1146196155]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="bottom boundary" unique_id=602517490]
+position = Vector2(0, 53)
+shape = SubResource("WorldBoundaryShape2D_055b2")
+
+[node name="left boundary" type="StaticBody2D" parent="." unique_id=1321590675]
+position = Vector2(20, 47)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="left boundary" unique_id=1041356980]
+position = Vector2(-73, -47)
+rotation = 1.5707964
+shape = SubResource("WorldBoundaryShape2D_2mgoq")
+
+[node name="right boundary" type="StaticBody2D" parent="." unique_id=2004634677]
+position = Vector2(65, 0)
+rotation = -1.5707964
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="right boundary" unique_id=467542538]
+position = Vector2(-4.371139e-08, 1)
+shape = SubResource("WorldBoundaryShape2D_uhnj4")
+
+[node name="top boundary" type="StaticBody2D" parent="." unique_id=1395350993]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="top boundary" unique_id=877929852]
+position = Vector2(0, -66)
+rotation = 3.1415927
+shape = SubResource("WorldBoundaryShape2D_42uki")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=261646]
+scale = Vector2(1.9863821, 1.0689039)
+zoom = Vector2(4, 4)
+
+[node name="Player" parent="." unique_id=1086875462 instance=ExtResource("2_1q6tm")]
+position = Vector2(-8, 56.999996)
+scale = Vector2(2.1485596, 2.1485596)
+
+[node name="GameManager" type="Node" parent="." unique_id=1999768846]
+script = ExtResource("3_v36qu")
+
+[node name="StopWhatch" parent="." unique_id=1715463415 instance=ExtResource("4_cggpd")]
+offset_left = -32.0
+offset_top = -82.0
+offset_right = 8.0
+offset_bottom = -66.0
+
+[node name="king enemy" parent="." unique_id=305075638 instance=ExtResource("5_v36qu")]
+position = Vector2(24, 40)
+piece = 2
