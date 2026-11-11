@@ -78,10 +78,13 @@ offset_right = 434.0
 offset_bottom = 88.5
 grow_vertical = 2
 text = "How to play:
-movement is WASD
+Your goal is to kill all the pieces on the chess board
+movement/aiming is WASD
+space to jump
 to attack you use the J key
 to dash you use the K key
-you can wall jump by jumping while against a wall"
+you can wall jump by jumping while against a wall
+pause and unpause by pressing escape"
 
 [connection signal="pressed" from="StartButton" to="StartButton" method="_on_pressed"]
 [connection signal="pressed" from="ExitButton" to="StartButton" method="_on_exit_button_pressed"]

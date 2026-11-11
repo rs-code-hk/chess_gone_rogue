@@ -56,10 +56,22 @@ func reduceEnemy() -> void:
 
 func _ready() -> void:
 	EventBus.enemyDied.connect(reduceEnemy)
+	enemiesLeft = TOTAL_ENEMIES
 	slash.hide()
 
 func getInputs() -> Vector2:
 	return Vector2(Input.get_axis("a", "d"), Input.get_axis("w", "s"))
+
+func getAllColliders(Shapecast:ShapeCast2D): 
+	var i = 0
+	var colliders = []
+	while Shapecast.get_collider(i) != get_node(""):
+		print("loop " + str(i))
+		colliders.append(Shapecast.get_collider(i))
+		i += 1
+	
+	print(colliders)
+	return colliders
 
 func checkHit():
 	var isHit = false
@@ -81,27 +93,28 @@ func checkHit():
 	return isHit
 
 func checkHitting(direction:Vector2):
-	var collider = null
+	var colliders = null
 	if direction.y == -1:
-		collider = attack_up.get_collider(0)
+		colliders = getAllColliders(attack_up)
 	elif direction.y == 1:
-		collider = attack_down.get_collider(0)
-		print(collider)
-		if collider not in [get_node(""), get_node("../bottom boundary"), get_node("./AttackDown")]:
+		colliders = getAllColliders(attack_down)
+		if get_node(KING_PATH) in colliders:
 			velocity.y += POGO_BOOST
 			jumps = 1
 			canDash = true
 	else:
 		if direction.x == -1:
-			collider = attack_left.get_collider(0)
+			colliders = getAllColliders(attack_left)
 		if direction.x == 1:
-			collider = attack_right.get_collider(0)
+			colliders = getAllColliders(attack_right)
 			
 	if slashFrames > 0:
 		slash.show()
 		if enemiesLeft > 0:
-			if collider:
-				EventBus.hit_enemy.emit(collider)
+				print("Enemies Left")
+				for i in colliders:
+					print(str(i))
+					await EventBus.hit_enemy.emit(i)
 				
 	else:
 		slash.hide()

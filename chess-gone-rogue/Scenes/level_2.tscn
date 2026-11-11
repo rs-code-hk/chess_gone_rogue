@@ -57,6 +57,7 @@ zoom = Vector2(4, 4)
 [node name="Player" parent="." unique_id=1086875462 instance=ExtResource("2_1q6tm")]
 position = Vector2(-8, 56.999996)
 scale = Vector2(2.1485596, 2.1485596)
+TOTAL_ENEMIES = 1
 
 [node name="GameManager" type="Node" parent="." unique_id=1999768846]
 script = ExtResource("3_v36qu")
