@@ -11,12 +11,14 @@ extends CharacterBody2D
 @onready var texture: AnimatedSprite2D = $AnimatedSprite2D
 @onready var slash: Sprite2D = $Slash
 
+@export var TOTAL_ENEMIES:int = 0
+
 signal enemyDied
 
 const SPEED = 100.0
 # Increase for less slide, decrease for more
-const FRICTION:float = 0.05
-const AIR_FRICTION = 0.02
+const FRICTION:float = 0.09
+const AIR_FRICTION = 0.03
 const GRAVITY = 0.02
 const JUMP_VELOCITY = -200.0
 const WALLJUMP_DELAY = 10
@@ -42,7 +44,7 @@ var canDash = true
 var dashDelay = 0
 var iFrames = 0
 var health = 3
-var enemiesLeft = 1
+var enemiesLeft = TOTAL_ENEMIES
 var slashFrames = 0
 var slashDirection = Vector2(0, 0)
 var noControl = 0
