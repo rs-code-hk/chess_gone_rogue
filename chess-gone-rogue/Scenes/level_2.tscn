@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://dl42n2340xka3" path="res://Scenes/game_manager.gd" id="3_v36qu"]
 [ext_resource type="PackedScene" uid="uid://bb10pxtex4k8i" path="res://Scenes/Stopwatch.tscn" id="4_cggpd"]
 [ext_resource type="PackedScene" uid="uid://b33s1ahnhk8h5" path="res://Scenes/king_enemy.tscn" id="5_v36qu"]
+[ext_resource type="PackedScene" uid="uid://c238e4kifa14b" path="res://Scenes/pause_menu.tscn" id="6_cggpd"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_055b2"]
 distance = -13.0
@@ -71,3 +72,7 @@ offset_bottom = -66.0
 [node name="king enemy" parent="." unique_id=305075638 instance=ExtResource("5_v36qu")]
 position = Vector2(24, 40)
 piece = 2
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=1237910828]
+
+[node name="pause menu" parent="UI" unique_id=154721936 instance=ExtResource("6_cggpd")]
