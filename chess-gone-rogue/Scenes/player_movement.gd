@@ -112,9 +112,10 @@ func checkHitting(direction:Vector2):
 		slash.show()
 		if enemiesLeft > 0:
 				print("Enemies Left")
-				for i in colliders:
-					print(str(i))
-					await EventBus.hit_enemy.emit(i)
+				if len(colliders) != 0:
+					for i in colliders:
+						print(str(i))
+						EventBus.hit_enemy.emit(i)
 				
 	else:
 		slash.hide()
