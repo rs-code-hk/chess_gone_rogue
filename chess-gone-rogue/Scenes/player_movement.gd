@@ -30,9 +30,10 @@ const KING_PATH = "../king enemy/hit box"
 const SLASH_DURATION = 20
 const SLASH_DELAY = 20
 const SLASH_LENGTH = 7
-const KNOCKBACK = 50
+const HIT_KNOCKBACK = 50
 const FREEZE_TOTAL = 10
 const POGO_BOOST = -300
+const HITTING_KNOCKBACK = 3
 
 var jumps = 2
 var walljumping = 0
@@ -79,10 +80,10 @@ func checkHit():
 		if ray_cast_up.get_collider() == get_node(KING_PATH):
 			isHit = true
 		if ray_cast_left.get_collider() == get_node(KING_PATH):
-			velocity.x += KNOCKBACK
+			velocity.x += HIT_KNOCKBACK
 			isHit = true
 		if ray_cast_right.get_collider() == get_node(KING_PATH):
-			velocity.x += -KNOCKBACK
+			velocity.x += -HIT_KNOCKBACK
 			isHit = true
 			
 	if isHit:
@@ -103,8 +104,12 @@ func checkHitting(direction:Vector2):
 	else:
 		if direction.x == -1:
 			colliders = getAllColliders(attack_left)
+			if colliders != null:
+				velocity.x += HITTING_KNOCKBACK
 		if direction.x == 1:
 			colliders = getAllColliders(attack_right)
+			if colliders != null:
+				velocity.x += -HITTING_KNOCKBACK
 			
 	if slashFrames > 0:
 		slash.show()
