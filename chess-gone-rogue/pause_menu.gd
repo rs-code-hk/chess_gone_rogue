@@ -11,6 +11,7 @@ func toggle_menu():
 	visible = !visible
 	#pause/unpause game
 	get_tree().paused = visible
+	EventBus.emit_signal("pause")
 	
 	
 func _unhandled_input(event: InputEvent) -> void:

@@ -66,11 +66,9 @@ func getAllColliders(Shapecast:ShapeCast2D):
 	var i = 0
 	var colliders = []
 	while Shapecast.get_collider(i) != get_node(""):
-		print("loop " + str(i))
 		colliders.append(Shapecast.get_collider(i))
 		i += 1
 	
-	print(colliders)
 	return colliders
 
 func checkHit():
@@ -111,10 +109,8 @@ func checkHitting(direction:Vector2):
 	if slashFrames > 0:
 		slash.show()
 		if enemiesLeft > 0:
-				print("Enemies Left")
 				if colliders != null:
 					for i in colliders:
-						print(str(i))
 						EventBus.hit_enemy.emit(i)
 				
 	else:
