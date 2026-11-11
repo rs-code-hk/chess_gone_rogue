@@ -1,0 +1,78 @@
+[gd_scene format=3 uid="uid://6len0jihhei0"]
+
+[ext_resource type="Texture2D" uid="uid://ddb43jiewp3fh" path="res://Assets/Environment/Board.png" id="1_qf6rc"]
+[ext_resource type="PackedScene" uid="uid://vjrwb5qw6cab" path="res://Scenes/player.tscn" id="2_53xsp"]
+[ext_resource type="Script" uid="uid://dl42n2340xka3" path="res://Scenes/game_manager.gd" id="3_5e78q"]
+[ext_resource type="PackedScene" uid="uid://bb10pxtex4k8i" path="res://Scenes/Stopwatch.tscn" id="4_l4wr6"]
+[ext_resource type="PackedScene" uid="uid://b33s1ahnhk8h5" path="res://Scenes/king_enemy.tscn" id="5_5rvg2"]
+[ext_resource type="PackedScene" uid="uid://c238e4kifa14b" path="res://Scenes/pause_menu.tscn" id="6_jtv8s"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_c81s1"]
+distance = -13.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_n4vm5"]
+distance = -13.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_fxnjf"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_xjeco"]
+
+[node name="level 3" type="Node2D" unique_id=1329458277]
+
+[node name="Board Display" type="Sprite2D" parent="." unique_id=534756577]
+texture = ExtResource("1_qf6rc")
+
+[node name="bottom boundary" type="StaticBody2D" parent="." unique_id=99606477]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="bottom boundary" unique_id=180720441]
+position = Vector2(0, 53)
+shape = SubResource("WorldBoundaryShape2D_c81s1")
+
+[node name="left boundary" type="StaticBody2D" parent="." unique_id=808119501]
+position = Vector2(20, 47)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="left boundary" unique_id=1283187788]
+position = Vector2(-73, -47)
+rotation = 1.5707964
+shape = SubResource("WorldBoundaryShape2D_n4vm5")
+
+[node name="right boundary" type="StaticBody2D" parent="." unique_id=1807109952]
+position = Vector2(65, 0)
+rotation = -1.5707964
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="right boundary" unique_id=827585709]
+position = Vector2(-4.371139e-08, 1)
+shape = SubResource("WorldBoundaryShape2D_fxnjf")
+
+[node name="top boundary" type="StaticBody2D" parent="." unique_id=1207619082]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="top boundary" unique_id=48869957]
+position = Vector2(0, -66)
+rotation = 3.1415927
+shape = SubResource("WorldBoundaryShape2D_xjeco")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1600053061]
+scale = Vector2(1.9863821, 1.0689039)
+zoom = Vector2(4, 4)
+
+[node name="Player" parent="." unique_id=1086875462 instance=ExtResource("2_53xsp")]
+position = Vector2(-8, 56.999996)
+scale = Vector2(2.1485596, 2.1485596)
+TOTAL_ENEMIES = 1
+
+[node name="GameManager" type="Node" parent="." unique_id=1363127307]
+script = ExtResource("3_5e78q")
+
+[node name="StopWhatch" parent="." unique_id=1715463415 instance=ExtResource("4_l4wr6")]
+offset_left = -32.0
+offset_top = -82.0
+offset_right = 8.0
+offset_bottom = -66.0
+
+[node name="king enemy" parent="." unique_id=305075638 instance=ExtResource("5_5rvg2")]
+position = Vector2(24, 40)
+piece = 3
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=1122441522]
+
+[node name="pause menu" parent="UI" unique_id=154721936 instance=ExtResource("6_jtv8s")]

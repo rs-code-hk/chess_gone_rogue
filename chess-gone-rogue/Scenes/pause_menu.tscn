@@ -32,7 +32,7 @@ process_mode = 3
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 100
-text = "main menu
+text = "Main Menu
 "
 
 [node name="restart" type="Button" parent="VBoxContainer" unique_id=1909985670]
@@ -40,7 +40,7 @@ process_mode = 3
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 100
-text = "restart
+text = "Restart
 "
 
 [connection signal="pressed" from="VBoxContainer/main menu" to="." method="_on_main_menu_pressed"]

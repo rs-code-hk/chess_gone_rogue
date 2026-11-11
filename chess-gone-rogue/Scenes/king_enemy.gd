@@ -51,7 +51,12 @@ func _ready() -> void:
 					if how_far_move in [56,40,24,8,-8,-24,-40,-56]: 
 						position.y = how_far_move
 			await get_tree().create_timer(2).timeout
-			
+	elif piece == 3:
+		sprite.texture = load("res://Assets/Pieces/Pawn.png")
+		while true:
+			if paused == false:
+				position.x =+ 16
+		await get_tree().create_timer(2).timeout	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
