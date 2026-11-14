@@ -36,6 +36,10 @@ animations = [{
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_npmfu"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1ra2f"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_deup0"]
+
 [node name="Player" type="CharacterBody2D" unique_id=1086875462]
 script = ExtResource("1_cvnsp")
 metadata/temp = 1
@@ -51,47 +55,49 @@ scale = Vector2(0.4467137, 0.4467137)
 sprite_frames = SubResource("SpriteFrames_f60y1")
 animation = &"Placeholder"
 
-[node name="RayCastLeft" type="RayCast2D" parent="." unique_id=1197997488]
-scale = Vector2(0.599998, 0.599998)
-target_position = Vector2(-8, 0)
-collide_with_areas = true
-
-[node name="RayCastRight" type="RayCast2D" parent="." unique_id=18192860]
-scale = Vector2(0.599998, 0.599998)
-target_position = Vector2(8, 0)
-collide_with_areas = true
-
-[node name="RayCastDown" type="RayCast2D" parent="." unique_id=608478978]
-target_position = Vector2(0, 5)
-
-[node name="RayCastUp" type="RayCast2D" parent="." unique_id=238682769]
-target_position = Vector2(0, -5)
-
 [node name="Slash" type="Sprite2D" parent="." unique_id=1704199297]
 position = Vector2(-2.3841858e-07, -0.9999995)
 scale = Vector2(0.6875, 0.6875)
 texture = ExtResource("3_6t5aa")
 
 [node name="AttackRight" type="ShapeCast2D" parent="." unique_id=332856077]
+visible = false
 scale = Vector2(0.25, 0.4)
 shape = SubResource("RectangleShape2D_3lynd")
 target_position = Vector2(40, 0)
 collide_with_areas = true
 
 [node name="AttackLeft" type="ShapeCast2D" parent="." unique_id=420841297]
+visible = false
 scale = Vector2(0.25, 0.4)
 shape = SubResource("RectangleShape2D_v2g0j")
 target_position = Vector2(-40, 0)
 collide_with_areas = true
 
 [node name="AttackDown" type="ShapeCast2D" parent="." unique_id=153255635]
+visible = false
 scale = Vector2(0.4, 0.25)
 shape = SubResource("RectangleShape2D_33cd3")
 target_position = Vector2(0, 40)
 collide_with_areas = true
 
 [node name="AttackUp" type="ShapeCast2D" parent="." unique_id=1156722171]
+visible = false
 scale = Vector2(0.4, 0.25)
 shape = SubResource("RectangleShape2D_npmfu")
 target_position = Vector2(0, -40)
+collide_with_areas = true
+
+[node name="HitboxLeft" type="ShapeCast2D" parent="." unique_id=1147321548]
+position = Vector2(-1.5, -1)
+scale = Vector2(0.15, 0.4)
+shape = SubResource("RectangleShape2D_1ra2f")
+target_position = Vector2(0, 0)
+collide_with_areas = true
+
+[node name="HitboxRight" type="ShapeCast2D" parent="." unique_id=2063014033]
+position = Vector2(1.5, -1)
+scale = Vector2(0.15, 0.4)
+shape = SubResource("RectangleShape2D_deup0")
+target_position = Vector2(0, 0)
 collide_with_areas = true

@@ -1,9 +1,7 @@
 extends CharacterBody2D
 
-@onready var ray_cast_left: RayCast2D = $RayCastLeft
-@onready var ray_cast_right: RayCast2D = $RayCastRight
-@onready var ray_cast_down: RayCast2D = $RayCastDown
-@onready var ray_cast_up: RayCast2D = $RayCastUp
+@onready var ray_cast_left: ShapeCast2D = $HitboxLeft
+@onready var ray_cast_right: ShapeCast2D = $HitboxRight
 @onready var attack_left: ShapeCast2D = $AttackLeft
 @onready var attack_right: ShapeCast2D = $AttackRight
 @onready var attack_down: ShapeCast2D = $AttackDown
@@ -13,7 +11,7 @@ extends CharacterBody2D
 
 @export var TOTAL_ENEMIES:int = 0
 
-signal enemyDied
+#signal enemyDied
 
 const SPEED = 100.0
 # Increase for less slide, decrease for more
@@ -64,27 +62,22 @@ func getInputs() -> Vector2:
 	return Vector2(Input.get_axis("a", "d"), Input.get_axis("w", "s"))
 
 func getAllColliders(Shapecast:ShapeCast2D): 
-	var i = 0
 	var colliders = []
-	while Shapecast.get_collider(i) != get_node(""):
+	for i in range(Shapecast.get_collision_count()):
 		colliders.append(Shapecast.get_collider(i))
-		i += 1
 	
 	return colliders
 
 func checkHit():
 	var isHit = false
+	var colliders = [getAllColliders(ray_cast_left), getAllColliders(ray_cast_right)]
 	if enemiesLeft > 0:
-		if ray_cast_down.get_collider() == get_node(KING_PATH):
-			isHit = true
-		if ray_cast_up.get_collider() == get_node(KING_PATH):
-			isHit = true
-		if ray_cast_left.get_collider() == get_node(KING_PATH):
-			velocity.x += HIT_KNOCKBACK
-			isHit = true
-		if ray_cast_right.get_collider() == get_node(KING_PATH):
-			velocity.x += -HIT_KNOCKBACK
-			isHit = true
+		var kingNode = get_node(KING_PATH)
+		for i in range(2):
+			if colliders[i] != null:
+				if kingNode in colliders[i]:
+					isHit = true
+					velocity.x += [1, -1][i]
 			
 	if isHit:
 		noControl = FREEZE_TOTAL
@@ -116,7 +109,7 @@ func checkHitting(direction:Vector2):
 		if enemiesLeft > 0:
 				if colliders != null:
 					for i in colliders:
-						EventBus.hit_enemy.emit(i)
+						EventBus.hit_enemy.emit((i))
 				
 	else:
 		slash.hide()
