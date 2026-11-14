@@ -109,7 +109,7 @@ func checkHitting(direction:Vector2):
 		if enemiesLeft > 0:
 				if colliders != null:
 					for i in colliders:
-						EventBus.hit_enemy.emit((i))
+						EventBus.hit_enemy.emit(i)
 				
 	else:
 		slash.hide()
