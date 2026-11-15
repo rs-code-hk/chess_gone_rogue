@@ -58,7 +58,7 @@ zoom = Vector2(4, 4)
 [node name="Player" parent="." unique_id=1086875462 instance=ExtResource("2_1q6tm")]
 position = Vector2(-8, 56.999996)
 scale = Vector2(2.1485596, 2.1485596)
-TOTAL_ENEMIES = 1
+TOTAL_ENEMIES = 2
 
 [node name="GameManager" type="Node" parent="." unique_id=1999768846]
 script = ExtResource("3_v36qu")
@@ -71,6 +71,10 @@ offset_bottom = -66.0
 
 [node name="king enemy" parent="." unique_id=305075638 instance=ExtResource("5_v36qu")]
 position = Vector2(24, 40)
+piece = 2
+
+[node name="king enemy2" parent="." unique_id=971431244 instance=ExtResource("5_v36qu")]
+position = Vector2(41, 22)
 piece = 2
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=1237910828]

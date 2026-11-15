@@ -71,14 +71,16 @@ func getAllColliders(Shapecast:ShapeCast2D):
 func checkHit():
 	var isHit = false
 	var colliders = [getAllColliders(ray_cast_left), getAllColliders(ray_cast_right)]
+	var nonEnemies = [get_node("../bottom boundary"), get_node("../top boundary"),
+	get_node("../left boundary"), get_node("../right boundary")]
 	if enemiesLeft > 0:
-		var kingNode = get_node(KING_PATH)
 		for i in range(2):
 			if colliders[i] != null:
-				if kingNode in colliders[i]:
-					isHit = true
-					velocity.x += [1, -1][i]
-			
+				for j in colliders[i]:
+					if j not in nonEnemies:
+						isHit = true
+						velocity.x += [1, -1][i] * HIT_KNOCKBACK
+
 	if isHit:
 		noControl = FREEZE_TOTAL
 	
