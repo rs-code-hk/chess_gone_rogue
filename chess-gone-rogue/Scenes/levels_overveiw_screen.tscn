@@ -107,8 +107,5 @@ text = "Levels"
 [connection signal="pressed" from="level 2 button" to="level 1 button" method="_on_level_2_button_pressed"]
 [connection signal="pressed" from="level 1 button" to="level 1 button" method="_on_pressed"]
 [connection signal="pressed" from="level 6 button" to="level 1 button" method="_on_level_6_button_pressed"]
-[connection signal="pressed" from="level 6 button" to="level 1 button" method="_on_level_3_button_pressed"]
 [connection signal="pressed" from="level 5 button" to="level 1 button" method="_on_level_5_button_pressed"]
-[connection signal="pressed" from="level 5 button" to="level 1 button" method="_on_level_2_button_pressed"]
 [connection signal="pressed" from="level 4 button" to="level 1 button" method="_on_level_4_button_pressed"]
-[connection signal="pressed" from="level 4 button" to="level 4 button" method="_on_pressed"]
