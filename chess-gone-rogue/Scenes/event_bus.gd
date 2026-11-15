@@ -3,6 +3,7 @@ extends Node
 signal hit_enemy(enemy)
 signal enemyDied
 signal pause()
+signal levelRestart(levelnum)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

@@ -9,6 +9,7 @@ extends CharacterBody2D
 @onready var texture: AnimatedSprite2D = $AnimatedSprite2D
 @onready var slash: Sprite2D = $Slash
 
+@export var LEVEL_NUM:String = ""
 @export var TOTAL_ENEMIES:int = 0
 
 #signal enemyDied
@@ -51,6 +52,7 @@ var noControl = 0
 func reduceEnemy() -> void:
 	enemiesLeft -= 1
 	if enemiesLeft == 0:
+		EventBus.levelRestart.emit(LEVEL_NUM)
 		get_tree().change_scene_to_file("res://Scenes/win_screen.tscn")
 
 func _ready() -> void:
@@ -155,6 +157,7 @@ func _physics_process(delta: float) -> void:
 				iFrames = MAX_I_FRAMES
 				health -= 1
 				if health == 0:
+					EventBus.levelRestart.emit(LEVEL_NUM)
 					get_tree().change_scene_to_file("res://Scenes/gameover.tscn")
 	
 	# Get movement
