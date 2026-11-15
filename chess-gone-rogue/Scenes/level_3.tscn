@@ -72,6 +72,12 @@ offset_bottom = -66.0
 [node name="king enemy" parent="." unique_id=305075638 instance=ExtResource("5_5rvg2")]
 position = Vector2(24, -56)
 piece = 3
+chessPosition = Vector2(0, 0)
+
+[node name="king enemy2" parent="." unique_id=1387780651 instance=ExtResource("5_5rvg2")]
+position = Vector2(48, -112)
+piece = 6
+chessPosition = Vector2(5, 5)
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=1122441522]
 
