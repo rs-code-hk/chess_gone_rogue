@@ -1,5 +1,10 @@
 extends Button
 
+var restartLevel = ""
+func updateRestart(level):
+	restartLevel = "res://Scenes/level_" + level + ".tscn"
+func _ready() -> void:
+	EventBus.levelRestart.connect(updateRestart)
 
 # Called when the node enters the scene tree for the first time.
 
@@ -14,4 +19,4 @@ func _on_main_menu_pressed() -> void:
 
 
 func _on_pressed() -> void:
-	get_tree().change_scene_to_file("res://Scenes/game.tscn")
+	get_tree().change_scene_to_file(restartLevel)
