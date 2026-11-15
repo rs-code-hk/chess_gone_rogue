@@ -13,6 +13,8 @@ func playMove() -> void:
 			while true:
 				var range_int_x = randi_range(-1, 1)
 				var range_int_y = randi_range(-1, 1)
+				if range_int_x == 0 and range_int_y == 0:
+					continue
 				
 				var simPosition = chessPosition
 				simPosition.x += range_int_x
@@ -26,7 +28,7 @@ func playMove() -> void:
 		2:
 			var simPosition = chessPosition
 			var x_or_y = randi() % 2
-			var square = randi_range(0, 8)
+			var square = randi_range(0, 7)
 			if x_or_y == 0:
 				simPosition.x = square
 			elif x_or_y == 1:
